@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TblBeruf.findAll", query = "SELECT t FROM TblBeruf t")
+    , @NamedQuery(name = "TblBeruf.findByAbteilung", query = "SELECT t FROM TblBeruf t JOIN TblAbteilung ta ON t.iDAbteilung=ta.aId WHERE ta.aId = :AId")
     , @NamedQuery(name = "TblBeruf.findByBId", query = "SELECT t FROM TblBeruf t WHERE t.bId = :bId")
     , @NamedQuery(name = "TblBeruf.findByBerufname", query = "SELECT t FROM TblBeruf t WHERE t.berufname = :berufname")
     , @NamedQuery(name = "TblBeruf.findByIDAbteilung", query = "SELECT t FROM TblBeruf t WHERE t.iDAbteilung = :iDAbteilung")

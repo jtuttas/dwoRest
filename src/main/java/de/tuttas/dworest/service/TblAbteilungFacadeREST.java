@@ -6,10 +6,13 @@
 package de.tuttas.dworest.service;
 
 import de.tuttas.dworest.TblAbteilung;
+import de.tuttas.dworest.TblBeruf;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -60,6 +63,17 @@ public class TblAbteilungFacadeREST extends AbstractFacade<TblAbteilung> {
     @Produces( {MediaType.APPLICATION_JSON})
     public TblAbteilung find(@PathParam("id") Integer id) {
         return super.find(id);
+    }
+    
+    @GET
+    @Path("{id}/beruf/")
+    @Produces( {MediaType.APPLICATION_JSON})
+    public List<TblBeruf> findBeruf(@PathParam("id") Integer id) {
+       Query q = em.createNamedQuery("TblBeruf.findByAbteilung");
+       q.setParameter("AId", id);
+       List<TblBeruf> berufe = q.getResultList();
+       return berufe;
+       
     }
 
     @GET

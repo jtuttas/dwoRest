@@ -5,11 +5,14 @@
  */
 package de.tuttas.dworest.service;
 
+import de.tuttas.dworest.helper.Lernsituation;
 import de.tuttas.dworest.TblBeruf;
+import de.tuttas.dworest.TblLernsituation;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -25,7 +28,7 @@ import javax.ws.rs.core.MediaType;
  * @author jtutt_000
  */
 @Stateless
-@Path("de.tuttas.dworest.tblberuf")
+@Path("beruf")
 public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
 
     @PersistenceContext(unitName = "de.tuttas_DWORest_war_1.0-SNAPSHOTPU")
@@ -63,6 +66,18 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
     }
 
     @GET
+    @Path("{id}/lernsituation/")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Lernsituation> findLernsituationByBeruf(@PathParam("id") Integer id) {
+        Query q = em.createNamedQuery("TblLernsituation.findByBeruf");
+        q.setParameter("idBeruf", id);
+        System.out.println("Get Lernfelder for Beruf mit ID=" + id);
+        List<Lernsituation> ls = q.getResultList();
+        System.out.println("Found " + ls.size() + " Items");
+        return ls;
+    }
+
+    @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<TblBeruf> findAll() {
@@ -87,5 +102,5 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
