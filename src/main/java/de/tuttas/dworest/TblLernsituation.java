@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TblLernsituation.findAll", query = "SELECT t FROM TblLernsituation t")
-    //, @NamedQuery(name = "TblLernsituation.findByBeruf", query = "SELECT new de.tuttas.WrapperKlassen.Lernsituation(t.lsid,t.name,t.lfNr,tlf.bezeichnung,t.uStunden,t.von,t.bis,t.ersteller,t.deletet,t.sichtbar) FROM TblLernsituation t JOIN TblLernfeld tlf on t.iDLernfeld=tlf.lfid JOIN TblBeruffach tbf on tlf.iDBerufFach=tbf.bfid JOIN TblUformberuf tuf ON tbf.iDUFormBeruf=tuf.ubid WHERE tuf.iDBeruf = :idBeruf")
-        , @NamedQuery(name = "TblLernsituation.findByBeruf", query = "SELECT NEW de.tuttas.dworest.helper.Lernsituation(t.lsid,t.name) FROM TblLernsituation t JOIN TblLernfeld tlf on t.iDLernfeld=tlf.lfid JOIN TblBeruffach tbf on tlf.iDBerufFach=tbf.bfid JOIN TblUformberuf tuf ON tbf.iDUFormBeruf=tuf.ubid WHERE tuf.iDBeruf = :idBeruf")
+    , @NamedQuery(name = "TblLernsituation.findByBeruf", query = "SELECT new de.tuttas.dworest.helper.Lernsituation(t.lsid,t.name,t.lfNr,tlf.bezeichnung,t.uStunden,t.von,t.bis,t.ersteller,t.deletet,t.sichtbar) FROM TblLernsituation t JOIN TblLernfeld tlf on t.iDLernfeld=tlf.lfid JOIN TblBeruffach tbf on tlf.iDBerufFach=tbf.bfid JOIN TblUformberuf tuf ON tbf.iDUFormBeruf=tuf.ubid WHERE tuf.iDBeruf = :idBeruf")
     , @NamedQuery(name = "TblLernsituation.findByLsid", query = "SELECT t FROM TblLernsituation t WHERE t.lsid = :lsid")
     , @NamedQuery(name = "TblLernsituation.findByName", query = "SELECT t FROM TblLernsituation t WHERE t.name = :name")
     , @NamedQuery(name = "TblLernsituation.findByVerweis", query = "SELECT t FROM TblLernsituation t WHERE t.verweis = :verweis")

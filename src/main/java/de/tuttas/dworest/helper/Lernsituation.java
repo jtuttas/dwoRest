@@ -38,10 +38,7 @@ public class Lernsituation {
         this.sichtbar = sichtbar;
     }
 
-    public Lernsituation(Integer id, String Name) {
-        this.id = id;
-        this.Name = Name;
-    }
+    
     public Integer getId() {
         return id;
     }
