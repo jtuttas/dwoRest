@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TblAbteilung.findAll", query = "SELECT t FROM TblAbteilung t")
+    , @NamedQuery(name = "TblAbteilung.findAllAbteilung", query = "SELECT NEW de.tuttas.dworest.helper.Abteilung(t.aId,t.abteilungsname,ts.schulformname) FROM TblAbteilung t JOIN TblSchulform ts on t.iDSchulform=ts.sFId")
     , @NamedQuery(name = "TblAbteilung.findByAId", query = "SELECT t FROM TblAbteilung t WHERE t.aId = :aId")
     , @NamedQuery(name = "TblAbteilung.findByAbteilungsname", query = "SELECT t FROM TblAbteilung t WHERE t.abteilungsname = :abteilungsname")
     , @NamedQuery(name = "TblAbteilung.findByAbteilungskuerzel", query = "SELECT t FROM TblAbteilung t WHERE t.abteilungskuerzel = :abteilungskuerzel")

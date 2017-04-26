@@ -7,6 +7,8 @@ package de.tuttas.dworest.service;
 
 import de.tuttas.dworest.TblAbteilung;
 import de.tuttas.dworest.TblBeruf;
+import de.tuttas.dworest.helper.Abteilung;
+import de.tuttas.dworest.helper.Beruf;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -68,19 +70,29 @@ public class TblAbteilungFacadeREST extends AbstractFacade<TblAbteilung> {
     @GET
     @Path("{id}/beruf/")
     @Produces( {MediaType.APPLICATION_JSON})
-    public List<TblBeruf> findBeruf(@PathParam("id") Integer id) {
+    public List<Beruf> findBeruf(@PathParam("id") Integer id) {
        Query q = em.createNamedQuery("TblBeruf.findByAbteilung");
        q.setParameter("AId", id);
-       List<TblBeruf> berufe = q.getResultList();
+       List<Beruf> berufe = q.getResultList();
        return berufe;
        
     }
 
     @GET
+    @Produces( {MediaType.APPLICATION_JSON})
+    public List<Abteilung> getAllAbteilungen(@PathParam("id") Integer id) {
+       Query q = em.createNamedQuery("TblAbteilung.findAllAbteilung");
+       List<Abteilung> abteilungen = q.getResultList();
+       return abteilungen;
+    }
+
+    @GET
+    @Path("all/")
     @Override
     @Produces({MediaType.APPLICATION_JSON})
     public List<TblAbteilung> findAll() {
-        return super.findAll();
+        return  super.findAll();
+        
     }
 
     @GET
