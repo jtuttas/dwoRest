@@ -20,12 +20,13 @@ public class Lernsituation {
     private String ersteller;
     private String deleted;
     private String sichtbar;
-
+    private Integer lsnr;
+    
     public Lernsituation() {
         
     }
     
-    public Lernsituation(Integer id, String Name, Short Lf, String LF_Name, int UStunden, Short von, Short bis, String ersteller, String deleted, String sichtbar) {
+    public Lernsituation(Integer id, String Name, Short Lf, String LF_Name, int UStunden, Short von, Short bis, String ersteller, String deleted, String sichtbar,Integer lsnr) {
         this.id = id;
         this.Name = Name;
         this.Lf = Lf;
@@ -36,8 +37,18 @@ public class Lernsituation {
         this.ersteller = ersteller;
         this.deleted = deleted;
         this.sichtbar = sichtbar;
+        this.lsnr=lsnr;
     }
 
+    public Integer getLsnr() {
+        return lsnr;
+    }
+
+    public void setLsnr(Integer lsnr) {
+        this.lsnr = lsnr;
+    }
+
+    
     
     public Integer getId() {
         return id;
