@@ -60,14 +60,14 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public TblBeruf find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Path("{id}/lernsituation/")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public List<Lernsituation> findLernsituationByBeruf(@PathParam("id") Integer id) {
         Query q = em.createNamedQuery("TblLernsituation.findByBeruf");
         q.setParameter("idBeruf", id);
@@ -79,14 +79,14 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public List<TblBeruf> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public List<TblBeruf> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }

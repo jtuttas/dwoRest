@@ -62,14 +62,14 @@ public class TblAbteilungFacadeREST extends AbstractFacade<TblAbteilung> {
 
     @GET
     @Path("{id}")
-    @Produces( {MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public TblAbteilung find(@PathParam("id") Integer id) {
         return super.find(id);
     }
     
     @GET
     @Path("{id}/beruf/")
-    @Produces( {MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public List<Beruf> findBeruf(@PathParam("id") Integer id) {
        Query q = em.createNamedQuery("TblBeruf.findByAbteilung");
        q.setParameter("AId", id);
@@ -79,7 +79,7 @@ public class TblAbteilungFacadeREST extends AbstractFacade<TblAbteilung> {
     }
 
     @GET
-    @Produces( {MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public List<Abteilung> getAllAbteilungen(@PathParam("id") Integer id) {
        Query q = em.createNamedQuery("TblAbteilung.findAllAbteilung");
        List<Abteilung> abteilungen = q.getResultList();
@@ -89,7 +89,7 @@ public class TblAbteilungFacadeREST extends AbstractFacade<TblAbteilung> {
     @GET
     @Path("all/")
     @Override
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public List<TblAbteilung> findAll() {
         return  super.findAll();
         

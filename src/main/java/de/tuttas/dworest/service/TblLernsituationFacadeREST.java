@@ -57,21 +57,21 @@ public class TblLernsituationFacadeREST extends AbstractFacade<TblLernsituation>
 
     @GET
     @Path("{id}")
-    @Produces({ MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public TblLernsituation find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({ MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public List<TblLernsituation> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({ MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public List<TblLernsituation> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
