@@ -76,6 +76,18 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
         System.out.println("Found " + ls.size() + " Items");
         return ls;
     }
+    
+    @GET
+    @Path("/klasse/{kname}/lernsituation/")
+    @Produces({"application/json; charset=iso-8859-1"})
+    public List<Lernsituation> findLernsituationByKlasse(@PathParam("kname") String kname) {
+        Query q = em.createNamedQuery("TblLernsituation.findByKlasse");
+        q.setParameter("kname", "\"%"+kname+"%\"");
+        System.out.println("Get Lernfelder for Klasse " + kname);
+        List<Lernsituation> ls = q.getResultList();
+        System.out.println("Found " + ls.size() + " Items");
+        return ls;
+    }
 
     @GET
     @Override
