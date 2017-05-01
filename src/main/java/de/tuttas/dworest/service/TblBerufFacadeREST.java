@@ -5,23 +5,33 @@
  */
 package de.tuttas.dworest.service;
 
+
 import de.tuttas.dworest.helper.Lernsituation;
 import de.tuttas.dworest.TblBeruf;
 import de.tuttas.dworest.TblLernsituation;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.Order;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.eclipse.persistence.oxm.JSONWithPadding;
+
+
 
 /**
  *
@@ -79,14 +89,23 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
     
     @GET
     @Path("/klasse/{kname}/lernsituation/")
-    @Produces({"application/json; charset=iso-8859-1"})
-    public List<Lernsituation> findLernsituationByKlasse(@PathParam("kname") String kname) {
+    @Produces({"application/javascript"})
+    public JSONWithPadding   findLernsituationByKlasse(@PathParam("kname") String kname,@QueryParam("callback") String callback) {
         Query q = em.createNamedQuery("TblLernsituation.findByKlasse");
         q.setParameter("kname", kname);
         System.out.println("Get Lernfelder for Klasse " + kname);
-        List<Lernsituation> ls = q.getResultList();
+        System.out.println("callback="+callback);
+        Collection<Lernsituation> ls = q.getResultList();
         System.out.println("Found " + ls.size() + " Items");
-        return ls;
+        //return null;
+        try {
+            return new JSONWithPadding(new GenericEntity<Collection<Lernsituation>>(ls) {}, callback);           
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+       
     }
 
     @GET
