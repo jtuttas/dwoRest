@@ -73,7 +73,7 @@ public class TblLernsituationFacadeREST extends AbstractFacade<TblLernsituation>
     
     @GET
     @Path("{id}/jsonp")
-    @Produces({"application/javascript","application/json; charset=iso-8859-1"})
+    @Produces({"application/javascript"})
     @JSONP(queryParam = JSONP.DEFAULT_QUERY)
     public TblLernsituation   findLernsituationJsonP(@PathParam("id") Integer id,@QueryParam(JSONP.DEFAULT_QUERY) String callback) {
         System.out.println("callback="+callback);

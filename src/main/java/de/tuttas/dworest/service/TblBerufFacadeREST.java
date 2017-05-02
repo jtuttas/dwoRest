@@ -91,7 +91,7 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
     
     @GET
     @Path("/klasse/{kname}/lernsituation/")
-    @Produces({"application/javascript","application/json; charset=iso-8859-1"})
+    @Produces({"application/javascript"})
     @JSONP(queryParam = JSONP.DEFAULT_QUERY)
     public List<Lernsituation>   findLernsituationByKlasse(@PathParam("kname") String kname,@QueryParam(JSONP.DEFAULT_QUERY) String callback) {
         Query q = em.createNamedQuery("TblLernsituation.findByKlasse");
