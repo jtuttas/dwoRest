@@ -58,6 +58,8 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
+
     public void edit(@PathParam("id") Integer id, TblBeruf entity) {
         super.edit(entity);
     }
@@ -89,7 +91,7 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
     
     @GET
     @Path("/klasse/{kname}/lernsituation/")
-    @Produces({"application/javascript"})
+    @Produces({"application/javascript","application/json; charset=iso-8859-1"})
     @JSONP(queryParam = JSONP.DEFAULT_QUERY)
     public List<Lernsituation>   findLernsituationByKlasse(@PathParam("kname") String kname,@QueryParam(JSONP.DEFAULT_QUERY) String callback) {
         Query q = em.createNamedQuery("TblLernsituation.findByKlasse");

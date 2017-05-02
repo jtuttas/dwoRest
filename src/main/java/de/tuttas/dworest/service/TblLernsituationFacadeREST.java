@@ -46,6 +46,7 @@ public class TblLernsituationFacadeREST extends AbstractFacade<TblLernsituation>
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public void create(TblLernsituation entity) {
         super.create(entity);
     }
@@ -72,7 +73,7 @@ public class TblLernsituationFacadeREST extends AbstractFacade<TblLernsituation>
     
     @GET
     @Path("{id}/jsonp")
-    @Produces({"application/javascript"})
+    @Produces({"application/javascript","application/json; charset=iso-8859-1"})
     @JSONP(queryParam = JSONP.DEFAULT_QUERY)
     public TblLernsituation   findLernsituationJsonP(@PathParam("id") Integer id,@QueryParam(JSONP.DEFAULT_QUERY) String callback) {
         System.out.println("callback="+callback);
