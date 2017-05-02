@@ -29,7 +29,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.eclipse.persistence.oxm.JSONWithPadding;
+import org.glassfish.jersey.server.JSONP;
 
 
 
@@ -90,22 +90,14 @@ public class TblBerufFacadeREST extends AbstractFacade<TblBeruf> {
     @GET
     @Path("/klasse/{kname}/lernsituation/")
     @Produces({"application/javascript"})
-    public JSONWithPadding   findLernsituationByKlasse(@PathParam("kname") String kname,@QueryParam("callback") String callback) {
+    @JSONP(queryParam = JSONP.DEFAULT_QUERY)
+    public List<Lernsituation>   findLernsituationByKlasse(@PathParam("kname") String kname,@QueryParam(JSONP.DEFAULT_QUERY) String callback) {
         Query q = em.createNamedQuery("TblLernsituation.findByKlasse");
         q.setParameter("kname", kname);
         System.out.println("Get Lernfelder for Klasse " + kname);
         System.out.println("callback="+callback);
-        Collection<Lernsituation> ls = q.getResultList();
-        System.out.println("Found " + ls.size() + " Items");
-        //return null;
-        try {
-            return new JSONWithPadding(new GenericEntity<Collection<Lernsituation>>(ls) {}, callback);           
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-       
+        List<Lernsituation> ls = q.getResultList();
+        return ls;
     }
 
     @GET

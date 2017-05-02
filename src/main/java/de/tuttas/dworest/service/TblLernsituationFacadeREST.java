@@ -24,7 +24,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
-import org.eclipse.persistence.oxm.JSONWithPadding;
+import org.glassfish.jersey.server.JSONP;
+
 
 /**
  *
@@ -32,6 +33,7 @@ import org.eclipse.persistence.oxm.JSONWithPadding;
  */
 @Stateless
 @Path("lernsituation")
+
 public class TblLernsituationFacadeREST extends AbstractFacade<TblLernsituation> {
 
     @PersistenceContext(unitName = "de.tuttas_DWORest_war_1.0-SNAPSHOTPU")
@@ -50,7 +52,7 @@ public class TblLernsituationFacadeREST extends AbstractFacade<TblLernsituation>
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({"application/json; charset=iso-8859-1"})
     public void edit(@PathParam("id") Integer id, TblLernsituation entity) {
         super.edit(entity);
     }
@@ -71,16 +73,10 @@ public class TblLernsituationFacadeREST extends AbstractFacade<TblLernsituation>
     @GET
     @Path("{id}/jsonp")
     @Produces({"application/javascript"})
-    public JSONWithPadding   findLernsituation(@PathParam("id") Integer id,@QueryParam("callback") String callback) {
+    @JSONP(queryParam = JSONP.DEFAULT_QUERY)
+    public TblLernsituation   findLernsituationJsonP(@PathParam("id") Integer id,@QueryParam(JSONP.DEFAULT_QUERY) String callback) {
         System.out.println("callback="+callback);
-        TblLernsituation ls = super.find(id);
-        try {
-            return new JSONWithPadding(ls, callback);           
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return super.find(id);
        
     }
 
@@ -100,7 +96,7 @@ public class TblLernsituationFacadeREST extends AbstractFacade<TblLernsituation>
 
     @GET
     @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces({"application/javascript"})
     public String countREST() {
         return String.valueOf(super.count());
     }
