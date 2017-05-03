@@ -29,8 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TblLernsituation.findAll", query = "SELECT t FROM TblLernsituation t")
-    , @NamedQuery(name = "TblLernsituation.findByBeruf", query = "SELECT new de.tuttas.dworest.helper.Lernsituation(t.lsid,t.name,t.lfNr,tlf.bezeichnung,t.uStunden,t.von,t.bis,t.ersteller,t.deletet,t.sichtbar,t.lsnr) FROM TblLernsituation t JOIN TblLernfeld tlf on t.iDLernfeld=tlf.lfid JOIN TblBeruffach tbf on tlf.iDBerufFach=tbf.bfid JOIN TblUformberuf tuf ON tbf.iDUFormBeruf=tuf.ubid WHERE tuf.iDBeruf = :idBeruf")
-    , @NamedQuery(name = "TblLernsituation.findByKlasse", query = "SELECT new de.tuttas.dworest.helper.Lernsituation(t.lsid,t.name,t.lfNr,tlf.bezeichnung,t.uStunden,t.von,t.bis,t.ersteller,t.deletet,t.sichtbar,t.lsnr) FROM TblLernsituation t JOIN TblLernfeld tlf on t.iDLernfeld=tlf.lfid JOIN TblBeruffach tbf on tlf.iDBerufFach=tbf.bfid JOIN TblUformberuf tuf ON tbf.iDUFormBeruf=tuf.ubid JOIN TblBeruf tb ON tuf.iDBeruf=tb.bId WHERE tb.berufname like  :kname")
+    , @NamedQuery(name = "TblLernsituation.findByBeruf", query = "SELECT new de.tuttas.dworest.helper.Lernsituation(t.lsid,t.name,t.lfNr,tlf.bezeichnung,t.uStunden,t.von,t.bis,t.ersteller,t.deletet,t.sichtbar,t.lsnr) FROM TblLernsituation t JOIN TblLernfeld tlf on t.iDLernfeld=tlf.lfid JOIN TblBeruffach tbf on tlf.iDBerufFach=tbf.bfid JOIN TblUformberuf tuf ON tbf.iDUFormBeruf=tuf.ubid WHERE tuf.iDBeruf = :idBeruf ORDER BY t.lfNr,t.lsnr")
+    , @NamedQuery(name = "TblLernsituation.findByKlasse", query = "SELECT new de.tuttas.dworest.helper.Lernsituation(t.lsid,t.name,t.lfNr,tlf.bezeichnung,t.uStunden,t.von,t.bis,t.ersteller,t.deletet,t.sichtbar,t.lsnr) FROM TblLernsituation t JOIN TblLernfeld tlf on t.iDLernfeld=tlf.lfid JOIN TblBeruffach tbf on tlf.iDBerufFach=tbf.bfid JOIN TblUformberuf tuf ON tbf.iDUFormBeruf=tuf.ubid JOIN TblBeruf tb ON tuf.iDBeruf=tb.bId WHERE tb.berufname like  :kname ORDER BY t.lfNr,t.lsnr")
     , @NamedQuery(name = "TblLernsituation.findByLsid", query = "SELECT t FROM TblLernsituation t WHERE t.lsid = :lsid")
     , @NamedQuery(name = "TblLernsituation.findByName", query = "SELECT t FROM TblLernsituation t WHERE t.name = :name")
     , @NamedQuery(name = "TblLernsituation.findByVerweis", query = "SELECT t FROM TblLernsituation t WHERE t.verweis = :verweis")
@@ -169,14 +169,11 @@ public class TblLernsituation implements Serializable {
         return lsnr;
     }
 
-    public void setLsnr(Integer lsnr) {
-        this.lsnr = lsnr;
-    }
-
     public Short getLfNr() {
         return lfNr;
     }
 
+    
     public void setLfNr(Short lfNr) {
         this.lfNr = lfNr;
     }
