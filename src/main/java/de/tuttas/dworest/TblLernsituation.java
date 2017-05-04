@@ -153,6 +153,8 @@ public class TblLernsituation implements Serializable {
         return verweis;
     }
 
+    
+    
     public void setVerweis(int verweis) {
         this.verweis = verweis;
     }
@@ -169,6 +171,11 @@ public class TblLernsituation implements Serializable {
         return lsnr;
     }
 
+    public void setLsnr(Integer lsnr) {
+        this.lsnr = lsnr;
+    }
+    
+    
     public Short getLfNr() {
         return lfNr;
     }
